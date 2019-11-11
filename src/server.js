@@ -16,7 +16,7 @@ app.use(compression())
 //
 // Replace the name below to match your own "defaultProject" value!
 //
-const appname = 'angular-gitlab-heroku'
+const appname = 'AngularJS-SteamReview';
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '..', 'dist', appname)))

@@ -16,18 +16,23 @@ app.use(compression())
 //
 // Replace the name below to match your own "defaultProject" value!
 //
-const appname = 'AngularJS-SteamReview'
+const appname = 'AngularJS-SteamReview';
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, '..', 'dist', appname)))
+
+var p = path.join(__dirname, '..', 'dist', appname);
+
+console.log(p.toString());
+
+app.use(express.static(p));
 
 // Catch all routes and return the index file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'dist', appname, 'index.html'))
-})
+  res.sendFile(path.join(__dirname, '..', 'dist', appname, 'index.html'));
+});
 
 // Get port from environment and store in Express.
-const port = process.env.PORT || '4200'
+const port = process.env.PORT || '4201'
 app.set('port', port)
 // Create HTTP server.
 const server = http.createServer(app)

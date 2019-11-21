@@ -8,7 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class GameService {
 
-  private urlBase: string = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=D640AA92C21657F4319FE96D5A269F4D&format=json';
+  private urlBase: string = 'https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=D640AA92C21657F4319FE96D5A269F4D&format=json';
 
   private httpOptions = {
 

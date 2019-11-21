@@ -1,0 +1,21 @@
+<!-- ADD FORM CONTROL!-->
+<div class="align-content-center">
+  <div class="row mx-auto">
+    <label>Email:
+      <input #email/>
+    </label>
+  </div>
+  <div class="row mx-auto">
+    <label>Password:
+      <input #password/>
+    </label>
+  </div>
+  <div class="row mx-auto">
+    <label>Steam:
+      <input #steam/>
+    </label>
+  </div>
+
+  <button (click)="register(email.value, password.value, steam.value)">Register</button>
+  <label class="alert-danger">{{message.get('register')}}</label>
+</div>

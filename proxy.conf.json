@@ -1,0 +1,14 @@
+{
+  "/apiv1": {
+    "target": "https://steam-app-back-end.herokuapp.com",
+    "secure": false
+  },
+  "/auth": {
+    "target": "https://steam-app-back-end.herokuapp.com",
+    "secure": true
+  },
+  "/": {
+    "target": "http://api.steampowered.com",
+    "secure": true
+  }
+}

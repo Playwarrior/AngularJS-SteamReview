@@ -1,0 +1,18 @@
+<div>
+  <div class="row">
+    <label>Email:
+      <input #email/>
+    </label>
+  </div>
+  <div class="row">
+    <label>Password:
+      <input #password/>
+    </label>
+  </div>
+  <div class="row">
+    <button (click)="logIn(email.value, password.value)">Login</button>
+  </div>
+  <div class="row">
+    <label class="alert-danger">{{message.get('login')}}</label>
+  </div>
+</div>

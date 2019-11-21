@@ -7,7 +7,7 @@ const app = express();
 
 app.use(compression());
 
-const appName = 'AngularJS-SteamReview';
+const appName = 'Angular-SteamReview';
 
 let p = path.join(__dirname, '..', 'dist', appName);
 

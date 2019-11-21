@@ -14,7 +14,7 @@ let p = path.join(__dirname, '..', 'dist', appName);
 app.use(express.static(p));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'dist', appname, 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'dist', appName, 'index.html'));
 });
 
 const port = process.env.PORT || '4201';

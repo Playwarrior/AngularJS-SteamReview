@@ -1,0 +1,16 @@
+<div>
+
+  <div *ngIf="game">
+    {{game.name}}
+  </div>
+  <!-- BANNER WITH GAME INFO! -->
+
+  <div *ngIf="reviews.length > 0">
+    <div *ngFor="let review of reviews.splice((page - 1) * limit, page * limit) ">
+      <app-review [review]="review"></app-review>
+    </div>
+  </div>
+  <div *ngIf="reviews.length === 0">
+    <p>No reviews found!</p>
+  </div>
+</div>

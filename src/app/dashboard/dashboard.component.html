@@ -1,3 +1,8 @@
-<div *ngIf="inLog.isLoggedIn()">
-  <p>{{gamesarray}}</p>
+<div *ngIf="inLog.isLoggedIn()" style="margin-top: 10px">
+  <div *ngFor="let j of counter(games.length / 4); let i = index" class="row">
+    <div *ngFor="let game of games.splice((i - 1) * 4, (i * 4))" class="col-3">
+      <app-game [game]="game"></app-game>
+    </div>
+    <br/>
+  </div>
 </div>

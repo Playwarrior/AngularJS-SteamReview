@@ -45,6 +45,10 @@ export class InLogService {
       });
   }
 
+  logout(){
+    this.loggedIn = null;
+  }
+
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.message.push(operation, error.message);

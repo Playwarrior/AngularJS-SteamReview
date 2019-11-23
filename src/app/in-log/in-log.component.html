@@ -1,18 +1,20 @@
-<div>
-  <div class="row">
-    <label>Email:
-      <input #email/>
-    </label>
-  </div>
-  <div class="row">
-    <label>Password:
-      <input #password/>
-    </label>
-  </div>
-  <div class="row">
-    <button (click)="logIn(email.value, password.value)">Login</button>
-  </div>
-  <div class="row">
-    <label class="alert-danger">{{message.get('login')}}</label>
+<div class="col-8">
+  <div class="white-back-ground">
+    <div class="row shift" style="margin-top: 10px;">
+      <label>Email <br />
+        <input class="input" #email/>
+      </label>
+    </div>
+    <div class="row shift">
+      <label>Password <br/>
+        <input class="input" type="password" #password/>
+      </label>
+    </div>
+    <div class="row shift">
+      <button class="login" (click)="logIn(email.value, password.value)"><span>Login</span></button>
+    </div>
+    <div class="row shift">
+      <label class="alert-danger">{{message.get('login')}}</label>
+    </div>
   </div>
 </div>

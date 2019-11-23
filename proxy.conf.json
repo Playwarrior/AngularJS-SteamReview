@@ -10,5 +10,6 @@
   "/": {
     "target": "http://api.steampowered.com",
     "secure": true
-  }
+  },
+  "changeOrigin": true
 }

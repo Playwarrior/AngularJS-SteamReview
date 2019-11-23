@@ -8,13 +8,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GameComponent } from './dashboard/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InLogComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

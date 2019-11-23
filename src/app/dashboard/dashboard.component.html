@@ -1,7 +1,12 @@
 <div *ngIf="inLog.isLoggedIn()" style="margin-top: 10px">
-  <div *ngFor="let j of counter(games.length / 4); let i = index" class="row">
-    <div *ngFor="let game of games.splice((i - 1) * 4, (i * 4))" class="col-3">
-      <app-game [game]="game"></app-game>
+  <label> Name:
+    <input type="text" [formControl]="title"/>
+  </label>
+  <div *ngFor="let j of counter(getFilteredGames().length / 4); let i = index" class="row">
+    <div *ngFor="let game of getFilteredGames().splice((i - 1) * 4, (i * 4))" class="col-3">
+      <a routerLink="/reviews/{{game.appid}}">
+        <app-game [game]="game"></app-game>
+      </a>
     </div>
     <br/>
   </div>

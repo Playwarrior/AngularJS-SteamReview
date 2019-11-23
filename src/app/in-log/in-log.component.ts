@@ -18,7 +18,6 @@ export class InLogComponent implements OnInit {
 
   logIn(email: string, password: string) {
     this.inLog.login(email, password, (user) => {
-      console.log(user);
       if (user != null) {
         this.router.navigate(['/dashboard']);
       }

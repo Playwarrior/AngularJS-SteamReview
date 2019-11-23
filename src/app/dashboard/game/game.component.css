@@ -1,11 +1,21 @@
 img {
   width: 100%;
   height: 100%;
-  margin-bottom: 10px;
-  transition: width 1s, height 1s;
+  transition: width 0.5s, height 0.5s;
+  padding: auto;
+  position: relative;
+  z-index: 1;
 }
 
-img:hover {
-  width: 110%;
-  height: 110%;
+.center {
+  padding: auto;
+  margin-bottom: 15px;
+}
+
+div {
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+div:hover {
+  transform: scale(1.1,1.1)
 }

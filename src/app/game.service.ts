@@ -9,7 +9,7 @@ import {Game} from '../models/Game';
 })
 export class GameService {
 
-  private urlBase: string = 'https://steam-app-back-end.herokuapp.com/apiv1/users/games?token=';
+  private urlBase: string = 'https://steam-app-back-end.herokuapp.com/apiv1/users/games';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -22,7 +22,15 @@ export class GameService {
 
   getGames(): Observable<Game[]> {
     if (this.inLog.isLoggedIn()) {
-      return this.http.get<Game[]>(this.urlBase + this.inLog.getUser().token, this.httpOptions);
+      return this.http.get<Game[]>(this.urlBase + `?token=${this.inLog.getUser().token}`, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
+
+  getGame(appId: string): Observable<Game> {
+    if(this.inLog.isLoggedIn()) {
+      return this.http.get<Game>(this.urlBase + `/${appId}?token=${this.inLog.getUser().token}`, this.httpOptions);
     } else {
       return of(null);
     }

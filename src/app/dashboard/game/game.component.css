@@ -5,6 +5,7 @@ img {
   padding: auto;
   position: relative;
   z-index: 1;
+  border-radius: 5px;
 }
 
 .center {
@@ -14,7 +15,9 @@ img {
 
 div {
   position: relative;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 0 5px #000;
+  border-radius: 5px;
 }
 div:hover {
   transform: scale(1.1,1.1)

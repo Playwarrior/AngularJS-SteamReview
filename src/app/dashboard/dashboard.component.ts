@@ -12,6 +12,8 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  //TODO: ADD FILTERING ROUTE IN BACK-END!
+
   games: Game[];
   title = new FormControl("");
 
@@ -32,7 +34,12 @@ export class DashboardComponent implements OnInit {
     if(this.title.value === undefined || this.title.value === null || this.title.value === '' || this.title.value === "")
       return this.games;
     else {
-      return this.games.filter((value) => value.name.toLowerCase().match(this.title.value.toString().toLowerCase()));
+      let filteredGames = this.games.filter((value) => {
+        let bool = value.name.toLowerCase().startsWith(this.title.value.toLowerCase());
+        return bool;
+      });
+
+      return filteredGames;
     }
   }
 

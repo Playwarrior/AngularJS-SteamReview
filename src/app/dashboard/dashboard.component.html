@@ -1,7 +1,14 @@
 <div *ngIf="inLog.isLoggedIn()" style="margin-top: 10px">
-  <label> Name:
-    <input type="text" [formControl]="title"/>
-  </label>
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <h2 style="color: white; text-align: center">Search</h2>
+      <label style="align-self: center">
+        <input class="input" type="text" [formControl]="title"/>
+      </label>
+    </div>
+    <div class="col-4"></div>
+  </div>
   <div *ngFor="let j of counter(getFilteredGames().length / 4); let i = index" class="row">
     <div *ngFor="let game of getFilteredGames().splice((i - 1) * 4, (i * 4))" class="col-3">
       <a routerLink="/reviews/{{game.appid}}">

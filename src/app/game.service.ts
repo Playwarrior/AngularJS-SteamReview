@@ -29,8 +29,16 @@ export class GameService {
   }
 
   getGame(appId: string): Observable<Game> {
-    if(this.inLog.isLoggedIn()) {
+    if (this.inLog.isLoggedIn()) {
       return this.http.get<Game>(this.urlBase + `/${appId}?token=${this.inLog.getUser().token}`, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
+
+  searchGames(name: string): Observable<Game[]> {
+    if (this.inLog.isLoggedIn()) {
+      return this.http.get<Game[]>(this.urlBase + `?token=${this.inLog.getUser().token}&name=${name}`, this.httpOptions);
     } else {
       return of(null);
     }

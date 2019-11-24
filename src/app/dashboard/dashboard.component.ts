@@ -4,6 +4,8 @@ import {GameService} from '../game.service';
 import {Game} from '../../models/Game';
 import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Observable, Subject} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,38 +14,34 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  //TODO: ADD FILTERING ROUTE IN BACK-END!
 
   games: Game[];
-  title = new FormControl("");
+  private searchTerms = new Subject<string>();
 
   constructor(public inLog: InLogService, private router: Router, private gamesService: GameService) {
   }
 
-  ngOnInit() {
-    if(!this.inLog.isLoggedIn()) {
-      this.router.navigate(['']);
-    } else {
-      this.gamesService.getGames().subscribe(games => {
-        this.games = games.sort((a, b) => a.name.localeCompare(b.name));
-      });
-    }
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 
-  getFilteredGames(): Game[] {
-    if(this.title.value === undefined || this.title.value === null || this.title.value === '' || this.title.value === "")
-      return this.games;
-    else {
-      let filteredGames = this.games.filter((value) => {
-        let bool = value.name.toLowerCase().startsWith(this.title.value.toLowerCase());
-        return bool;
-      });
+  ngOnInit() {
+    if (!this.inLog.isLoggedIn()) {
+      this.router.navigate(['']);
 
-      return filteredGames;
+    } else {
+      this.searchTerms.pipe(
+        debounceTime(300),
+
+        distinctUntilChanged(),
+
+        switchMap((term: string) => this.gamesService.searchGames(term))
+      ).subscribe(games => this.games = games);
     }
   }
 
   counter(i: number) {
-    return new Array(Math.ceil(i));
+    console.log(Math.ceil(i));
+    return new Array(Math.ceil(i) + 1);
   }
 }

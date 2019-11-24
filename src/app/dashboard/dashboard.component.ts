@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
     } else {
       this.searchTerms.pipe(
-        debounceTime(300),
+        debounceTime(800),
 
         distinctUntilChanged(),
 
@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
   }
 
   counter(i: number) {
-    console.log(Math.ceil(i));
     return new Array(Math.ceil(i) + 1);
   }
 }

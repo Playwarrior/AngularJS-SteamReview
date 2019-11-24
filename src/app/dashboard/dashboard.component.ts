@@ -36,7 +36,11 @@ export class DashboardComponent implements OnInit {
         distinctUntilChanged(),
 
         switchMap((term: string) => this.gamesService.searchGames(term))
-      ).subscribe(games => this.games = games);
+      ).subscribe(games => {
+        if (this.games != null || this.games != undefined) {
+          this.games = games;
+        }
+      });
     }
   }
 

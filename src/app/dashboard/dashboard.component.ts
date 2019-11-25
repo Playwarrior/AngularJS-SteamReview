@@ -6,6 +6,8 @@ import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {clone} from '../../util/cloning';
+import {ChangeDetectorRef} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,15 +16,24 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
 
-
+  gameList: Game[];
   games: Game[];
-  private searchTerms = new Subject<string>();
 
-  constructor(public inLog: InLogService, private router: Router, private gamesService: GameService) {
+  constructor(public inLog: InLogService, private router: Router, private gamesService: GameService, private cdRef: ChangeDetectorRef) {
   }
 
   search(term: string): void {
-    this.searchTerms.next(term);
+    term = term.trim();
+
+    if (term && term.length > 0) {
+      this.gameList = clone<Game>(this.games).filter(game => game.name.toLowerCase().startsWith(term.trim().toLowerCase()));
+    } else {
+      this.gameList = clone<Game>(this.games);
+    }
+
+    this.gameList.sort((a, b) => a.name.localeCompare(b.name));
+
+    this.cdRef.detectChanges();
   }
 
   ngOnInit() {
@@ -30,17 +41,11 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['']);
 
     } else {
-      this.searchTerms.pipe(
-        debounceTime(800),
-
-        distinctUntilChanged(),
-
-        switchMap((term: string) => this.gamesService.searchGames(term))
-      ).subscribe(games => {
-        if (this.games != null || this.games != undefined) {
-          this.games = games;
-        }
+      this.gamesService.getGames((games) => {
+        this.games = clone<Game>(games);
+        this.gameList = clone<Game>(games);
       });
+      this.cdRef.detectChanges();
     }
   }
 

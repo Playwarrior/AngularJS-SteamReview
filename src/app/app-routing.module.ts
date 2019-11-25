@@ -4,6 +4,7 @@ import {InLogComponent} from './in-log/in-log.component';
 import {RegisterComponent} from './register/register.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ReviewsComponent} from './reviews/reviews.component';
+import {ReviewformComponent} from './reviews/reviewform/reviewform.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,9 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'reviews/:id', component: ReviewsComponent}
+  {path: 'reviews/:id', component: ReviewsComponent},
+  {path: 'reviews/:appid/new', component: ReviewformComponent},
+  {path: 'reviews/:appid/:id', component: ReviewformComponent}
 ];
 
 @NgModule({

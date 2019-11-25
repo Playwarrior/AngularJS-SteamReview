@@ -35,13 +35,13 @@ export class ReviewsComponent implements OnInit {
   getData() {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.gameService.getGame(id + '').subscribe(game => {
+    this.gameService.getGame(id.toString(), (game) => {
       this.game = game;
+      console.log(game);
     });
 
-    this.reviewService.getReviews(id + '').subscribe(reviews => {
+    this.reviewService.getReviews(id.toString()).subscribe(reviews => {
       this.reviews = reviews;
-      console.log(reviews);
       this.maxPage = this.reviews.length / this.limit;
     });
   }

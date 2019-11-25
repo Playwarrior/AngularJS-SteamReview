@@ -1,20 +1,20 @@
 <div *ngIf="inLog.isLoggedIn()" style="margin-top: 10px">
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-      <h2 style="color: white; text-align: center">Search</h2>
-      <label style="align-self: center">
-        <input #searchBox class="input" type="text" (input)="search(searchBox.value)"/>
+    <div class="col-12">
+      <label>
+        <input #searchBox class="input" type="text"/>
       </label>
+      <button type="submit" class="login d-inline-block" (click)="search(searchBox.value)"><span>Search</span></button>
     </div>
-    <div class="col-4"></div>
   </div>
-  <div *ngFor="let j of counter(games.length / 4); let i = index" class="row">
-    <div *ngFor="let game of games.splice((i - 1) * 4, (i * 4))" class="col-3">
-      <a routerLink="/reviews/{{game.appid}}">
-        <app-game [game]="game"></app-game>
-      </a>
+  <div *ngIf="gameList">
+    <div *ngFor="let j of counter(gameList.length / 4); let i = index" class="row">
+      <div *ngFor="let game of gameList.splice((i) * 4, ((i + 1) * 4))" class="col-3">
+        <a routerLink="/reviews/{{game.appid}}">
+          <app-game [game]="game"></app-game>
+        </a>
+      </div>
+      <br/>
     </div>
-    <br/>
   </div>
 </div>

@@ -9,7 +9,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class ReviewService {
 
-  baseUrl = 'https://steam-app-back-end.herokuapp.com/apiv1/reviews';
+  baseUrl = 'https://steam-app-back-end.herokuapp.com/apiv1';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -22,9 +22,36 @@ export class ReviewService {
 
   getReviews(appId: string): Observable<Review[]> {
     if (this.inLog.isLoggedIn()) {
-      return this.http.get<Review[]>(this.baseUrl + `/${appId}?token=${this.inLog.getUser().token}`, this.httpOptions);
+      return this.http.get<Review[]>(this.baseUrl + `/reviews/${appId}?token=${this.inLog.getUser().token}`, this.httpOptions);
     } else {
       of(null);
+    }
+  }
+
+  getReview(id: string): Observable<Review> {
+    if (this.inLog.isLoggedIn()) {
+      return this.http.get<Review>(this.baseUrl + '/review/' + id + `?token=${this.inLog.getUser().token}`, this.httpOptions);
+    } else {
+      of(null);
+    }
+  }
+
+  postReview(appId, title, content) {
+    if (this.inLog.isLoggedIn()) {
+      return this.http.post(this.baseUrl + `/reviews?token=${this.inLog.getUser().token}`, {
+        title: title,
+        content: content,
+        appId: appId
+      }, this.httpOptions);
+    }
+  }
+
+  updateReview(id, title, content) {
+    if(this.inLog.isLoggedIn()) {
+      return this.http.put(this.baseUrl + `/reviews/${id}?token=${this.inLog.getUser().token}`, {
+        title: title,
+        content: content
+      }, this.httpOptions);
     }
   }
 }

@@ -3,6 +3,7 @@ import {InLogService} from './in-log.service';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Game} from '../models/Game';
+import {clone} from '../util/cloning';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,11 @@ export class GameService {
     if (this.inLog.isLoggedIn()) {
       if (this.games === null || this.games === undefined) {
         return this.http.get<Game[]>(this.urlBase + `?token=${this.inLog.getUser().token}`, this.httpOptions).subscribe(games => {
-          this.games = games;
+          this.games = clone<Game>(games);
           cb(games);
         });
       } else {
-        cb(this.games);
+        cb(clone<Game>(this.games));
       }
     } else {
       this.games = null;
@@ -37,7 +38,7 @@ export class GameService {
     }
   }
 
-  getGame(appId: string, cb): Game {
+  getGame(appId: string, cb) {
     if (this.inLog.isLoggedIn()) {
       if (!this.hasGame(appId)) {
         this.http.get<Game>(this.urlBase + `/${appId}?token=${this.inLog.getUser().token}`, this.httpOptions).subscribe(game => {
@@ -45,11 +46,11 @@ export class GameService {
           cb(game);
         });
       } else {
-        return this.games.filter(game => game.appid == appId)[0];
+        cb(this.games.filter(game => game.appid == appId)[0]);
       }
     } else {
       this.games = null;
-      return null;
+      cb(null);
     }
   }
 

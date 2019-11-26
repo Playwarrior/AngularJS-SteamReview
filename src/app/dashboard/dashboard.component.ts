@@ -49,7 +49,15 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  counter(i: number) {
-    return new Array(Math.ceil(i) + 1);
+  getGameRow(index) : Game[] {
+    console.log(index);
+
+    console.log((index * 4) + " - " + (index + 1) * 4);
+
+    return this.gameList.splice(index * 4, (index * 4) + 4);
+  }
+
+  counter() {
+    return new Array(Math.ceil(this.gameList.length / 4));
   }
 }

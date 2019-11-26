@@ -8,13 +8,13 @@
     </div>
   </div>
   <div *ngIf="gameList">
-    <div *ngFor="let j of counter(gameList.length / 4); let i = index" class="row">
-      <div *ngFor="let game of gameList.splice((i) * 4, ((i + 1) * 4))" class="col-3">
+    <div *ngFor="let j of counter(); let i =  index" class="row">
+      <div *ngFor="let game of getGameRow(i)" class="col-3">
         <a routerLink="/reviews/{{game.appid}}">
           <app-game [game]="game"></app-game>
         </a>
       </div>
-      <br/>
     </div>
+    <br/>
   </div>
 </div>

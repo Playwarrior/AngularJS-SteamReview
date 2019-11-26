@@ -1,12 +1,13 @@
 export class Review {
 
-  user: string;
-
-  constructor(public appId: string,
-              public title: string,
-              public content: string,
-              public date: Date,
-              public edited: boolean,
-              public votes: {}) {
+  constructor(
+    public _id: string,
+    public appId: string,
+    public title: string,
+    public content: string,
+    public postDate: Date,
+    public edited: boolean,
+    public user: string,
+    public votes: {}) {
   }
 }

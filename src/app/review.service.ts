@@ -54,4 +54,12 @@ export class ReviewService {
       }, this.httpOptions);
     }
   }
+
+  deleteReview(id) {
+    if(this.inLog.isLoggedIn()) {
+      return this.http.delete(this.baseUrl + `/reviews/${id}?token=${this.inLog.getUser().token}`, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
 }

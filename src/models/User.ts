@@ -1,5 +1,9 @@
 export class User {
 
-  constructor(public steam: string, public token: string){}
+  constructor(
+    public id: string,
+    public steam: string,
+    public token: string) {
+  }
 
 }

@@ -3,11 +3,12 @@
   <div *ngIf="game">
     <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_icon_url}}.jpg" alt="">
   </div>
+  <a routerLink="/reviews/{{game.appid}}/new">Post</a>
   <!-- BANNER WITH GAME INFO! -->
 
   <div *ngIf="reviews.length > 0">
     <div *ngFor="let review of reviews.splice((page - 1) * limit, page * limit) ">
-      <app-review [review]="review"></app-review>
+      <app-review [review]="review" [game]="game"></app-review>
     </div>
   </div>
   <div *ngIf="reviews.length === 0">

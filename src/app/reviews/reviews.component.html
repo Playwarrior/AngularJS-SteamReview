@@ -1,15 +1,31 @@
 <div>
-
-  <div *ngIf="game">
-    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_icon_url}}.jpg" alt="">
+  <div *ngIf="game" class="row">
+    <div class="col-12">
+      <h2 class="align-self-center text-center" style="width: 100%; height: 100%; display: inline-block; color: white">
+        Reviews for {{game.name}}</h2>
+    </div>
   </div>
-  <a routerLink="/reviews/{{game.appid}}/new">Post</a>
-  <!-- BANNER WITH GAME INFO! -->
+  <div *ngIf="!hasReview()">
+    <a routerLink="/reviews/{{game.appid}}/new">Post</a>
+  </div>
 
   <div *ngIf="reviews.length > 0">
-    <div *ngFor="let review of reviews.splice((page - 1) * limit, page * limit) ">
-      <app-review [review]="review" [game]="game"></app-review>
+    <div *ngFor="let j of counter(); let i = index">
+      <div style="margin-bottom: 10px">
+        <app-review [review]="getReview(i)" [game]="game" [profile]="getProfile(i)"></app-review>
+      </div>
     </div>
+
+    <!-- BUTTONS FOR NEXT PAGE AND PREVIOUS PAGE!-->
+
+    <div class="row">
+      <button class="btn-steam align-self-center" style="margin-left: 350px; margin-right: 5px;"
+              [disabled]="!hasPreviousPage()" (click)="previousPage()"><span><</span></button>
+
+      <button class="btn-steam align-self-center" [disabled]="!hasNextPage()" (click)="nextPage()"><span>></span>
+      </button>
+    </div>
+
   </div>
   <div *ngIf="reviews.length === 0">
     <p>No reviews found!</p>

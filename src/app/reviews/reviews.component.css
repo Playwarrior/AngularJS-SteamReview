@@ -1,0 +1,22 @@
+.logo {
+  border-radius: 50%;
+}
+
+.btn-steam {
+  border-radius: 2px;
+  border: none;
+  padding: 1px;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #67c1f5;
+  background: rgba( 103, 193, 245, 0.2 );
+}
+
+.btn-steam > span {
+  padding: 0 15px;
+  font-size: 15px;
+  line-height: 30px;
+  display: block;
+  background: transparent;
+}

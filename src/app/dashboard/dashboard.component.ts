@@ -50,11 +50,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getGameRow(index) : Game[] {
-    console.log(index);
-
-    console.log((index * 4) + " - " + (index + 1) * 4);
-
-    return this.gameList.splice(index * 4, (index * 4) + 4);
+    return [this.gameList[index * 4], this.gameList[index * 4 + 1], this.gameList[index * 4 + 2], this.gameList[index * 4 + 3]];
   }
 
   counter() {

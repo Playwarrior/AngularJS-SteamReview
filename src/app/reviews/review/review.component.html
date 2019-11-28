@@ -1,10 +1,18 @@
-<div *ngIf="review" class="col-12">
-  <h3>{{review.title}}</h3>
-  <p>{{review.content}}</p>
-  <span>{{review.postDate | date}}<span *ngIf="review.edited"> - (Edited)</span></span>
-  <div *ngIf="canEditDelete()">
-    <a routerLink="/reviews/{{game.appid}}/{{review._id}}"><button class="btn-steam"><span>Edit</span></button></a>
-    <button class="btn-steam d-inline" (submit)="delete()"><span>Delete</span></button>
+<div *ngIf="review" class="row steam-back-ground">
+  <div *ngIf="profile" class="col-2">
+    <img src="{{profile.avatarfull}}" width="100" height="100" alt=""/>
   </div>
-  <!-- ADD BUTTONS TO EDIT & DELETE THE REVIEW! IF THE REVIEW IS FROM THE USER! -->
+  <div class="col-10">
+    <h3>{{review.title}}</h3>
+    <p><i>{{review.content}}</i></p>
+    <div class="d-inline">
+      <p>{{review.postDate | date}} <span *ngIf="review.edited" style="color: white;">- (<i>Edited</i>)</span></p>
+    </div>
+    <div *ngIf="canEditDelete()" class="d-inline align-content-end">
+      <a routerLink="/reviews/{{game.appid}}/{{review._id}}" style="margin-right: 5px;">
+        <button class="btn-steam"><span>Edit</span></button>
+      </a>
+      <button class="btn-steam d-inline" (submit)="delete()"><span>Delete</span></button>
+    </div>
+  </div>
 </div>

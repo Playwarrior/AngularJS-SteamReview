@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Game} from '../../models/Game';
 import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../game.service';
@@ -7,6 +7,9 @@ import {Review} from '../../models/Review';
 import {ReviewService} from '../review.service';
 import {InLogService} from '../in-log.service';
 import {Router} from '@angular/router';
+import {UserService} from '../user.service';
+import {clone} from '../../util/cloning';
+import {Profile} from '../../models/Profile';
 
 @Component({
   selector: 'app-reviews',
@@ -17,6 +20,7 @@ export class ReviewsComponent implements OnInit {
 
   game: Game;
   reviews: Review[];
+  profiles: Profile[] = [];
 
   limit: number = 15;
   page: number = 1;
@@ -27,6 +31,7 @@ export class ReviewsComponent implements OnInit {
     private gameService: GameService,
     private reviewService: ReviewService,
     public inLogService: InLogService,
+    private userService: UserService,
     private location: Location,
     private router: Router
   ) {
@@ -37,12 +42,24 @@ export class ReviewsComponent implements OnInit {
 
     this.gameService.getGame(id.toString(), (game) => {
       this.game = game;
-      console.log(game);
     });
 
     this.reviewService.getReviews(id.toString()).subscribe(reviews => {
-      this.reviews = reviews;
+      this.reviews = clone<Review>(reviews);
       this.maxPage = this.reviews.length / this.limit;
+
+      let index = 0;
+
+      reviews.forEach(review => {
+        this.getProfileAsync(review.user, index);
+        index++;
+      });
+    });
+  }
+
+  getProfileAsync(user, index) {
+    this.userService.getProfile(user, (profile) => {
+      this.profiles[index] = profile;
     });
   }
 
@@ -76,5 +93,26 @@ export class ReviewsComponent implements OnInit {
     if (this.hasPreviousPage()) {
       this.page--;
     }
+  }
+
+  counter() {
+    return new Array(this.limit);
+  }
+
+  getReview(index: number): Review {
+    return this.reviews[((this.page - 1) * this.limit) + index];
+  }
+
+  getProfile(index: number): Profile {
+    return this.profiles[((this.page - 1) * this.limit) + index];
+  }
+
+  hasReview() : boolean {
+    for(let i = 0; i < this.reviews.length; i++){
+      let review = this.reviews[i];
+      if(review.user == this.inLogService.getUser().id)
+        return true;
+    }
+    return false;
   }
 }

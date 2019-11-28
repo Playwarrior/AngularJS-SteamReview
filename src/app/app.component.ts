@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {InLogService} from './in-log.service';
+import {UserService} from './user.service';
+import {Profile} from '../models/Profile';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,11 @@ import {InLogService} from './in-log.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular-SteamReview';
 
-  constructor(public inLog: InLogService) {
+  title = 'Angular-SteamReview';
+  profile: Profile;
+
+  constructor(public inLog: InLogService, private userService: UserService) {
 
   }
 }

@@ -1,12 +1,14 @@
 <div>
   <div *ngIf="game" class="row">
-    <div class="col-12">
+    <div class="col-11">
       <h2 class="align-self-center text-center" style="width: 100%; height: 100%; display: inline-block; color: white">
         Reviews for {{game.name}}</h2>
     </div>
-  </div>
-  <div *ngIf="!hasReview()">
-    <a routerLink="/reviews/{{game.appid}}/new">Post</a>
+    <div *ngIf="hasReview()" class="col-1">
+      <a routerLink="/reviews/{{game.appid}}/new">
+        <img src="../../assets/steam-plus-sign.png" alt="" width="40" height="40">
+      </a>
+    </div>
   </div>
 
   <div *ngIf="reviews.length > 0">
@@ -19,11 +21,13 @@
     <!-- BUTTONS FOR NEXT PAGE AND PREVIOUS PAGE!-->
 
     <div class="row">
-      <button class="btn-steam align-self-center" style="margin-left: 350px; margin-right: 5px;"
-              [disabled]="!hasPreviousPage()" (click)="previousPage()"><span><</span></button>
+      <div class="mx-auto" style="display: inline-block">
+        <button class="btn-steam align-self-center" style="margin-right: 5px;"
+                [disabled]="!hasPreviousPage()" (click)="previousPage()"><span><</span></button>
 
-      <button class="btn-steam align-self-center" [disabled]="!hasNextPage()" (click)="nextPage()"><span>></span>
-      </button>
+        <button class="btn-steam align-self-center" [disabled]="!hasNextPage()" (click)="nextPage()"><span>></span>
+        </button>
+      </div>
     </div>
 
   </div>

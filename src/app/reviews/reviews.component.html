@@ -4,7 +4,7 @@
       <h2 class="align-self-center text-center" style="width: 100%; height: 100%; display: inline-block; color: white">
         Reviews for {{game.name}}</h2>
     </div>
-    <div *ngIf="hasReview()" class="col-1">
+    <div *ngIf="!hasReview()" class="col-1">
       <a routerLink="/reviews/{{game.appid}}/new">
         <img src="../../assets/steam-plus-sign.png" alt="" width="40" height="40">
       </a>

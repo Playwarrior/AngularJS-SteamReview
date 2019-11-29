@@ -15,6 +15,17 @@ img {
   margin-left: 7.5px;
 }
 
+.vote-image {
+  margin: 0;
+}
+
+.vote-button {
+  background-color: transparent;
+  border: none;
+  display: inline-block;
+  outline: none;
+}
+
 .steam-back-ground {
   background-color: rgba(32, 47, 67, 0.8);;
   border-radius: 3px;

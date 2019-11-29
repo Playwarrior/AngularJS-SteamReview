@@ -25,9 +25,37 @@ export class ReviewComponent implements OnInit, AfterContentChecked {
   }
 
   delete() {
-    this.reviewService.deleteReview(this.review._id).subscribe(() => {
-
+    this.reviewService.deleteReview(this.review._id).subscribe((object) => {
+      this.review = null;
     });
+  }
+
+  upVote() {
+    if (!this.review.isUpVoted) {
+      this.reviewService.upVoteReview(this.review._id).subscribe((object) => {
+        this.review.isUpVoted = true;
+        this.review.upVoteCount++;
+
+        if (this.review.isDownVoted) {
+          this.review.downVoteCount--;
+          this.review.isDownVoted = false;
+        }
+      });
+    }
+  }
+
+  downVote() {
+    if (!this.review.isDownVoted) {
+      this.reviewService.downVoteReview(this.review._id).subscribe((object) => {
+        this.review.isDownVoted = true;
+        this.review.downVoteCount++;
+
+        if (this.review.isUpVoted) {
+          this.review.upVoteCount--;
+          this.review.isUpVoted = false;
+        }
+      });
+    }
   }
 
   canEditDelete() {

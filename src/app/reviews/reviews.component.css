@@ -20,3 +20,7 @@
   display: block;
   background: transparent;
 }
+
+.btn-steam:disabled {
+  background-color: #171a21;
+}

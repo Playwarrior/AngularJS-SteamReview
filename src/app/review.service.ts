@@ -46,8 +46,20 @@ export class ReviewService {
     }
   }
 
+  upVoteReview(id) {
+    if (this.inLog.isLoggedIn()) {
+      return this.http.put(this.baseUrl + `/reviews/${id}/upvote?token=${this.inLog.getUser().token}`, {}, this.httpOptions);
+    }
+  }
+
+  downVoteReview(id) {
+    if (this.inLog.isLoggedIn()) {
+      return this.http.put(this.baseUrl + `/reviews/${id}/downvote?token=${this.inLog.getUser().token}`, {}, this.httpOptions);
+    }
+  }
+
   updateReview(id, title, content) {
-    if(this.inLog.isLoggedIn()) {
+    if (this.inLog.isLoggedIn()) {
       return this.http.put(this.baseUrl + `/reviews/${id}?token=${this.inLog.getUser().token}`, {
         title: title,
         content: content
@@ -55,8 +67,8 @@ export class ReviewService {
     }
   }
 
-  deleteReview(id) {
-    if(this.inLog.isLoggedIn()) {
+  deleteReview(id): Observable<Object> {
+    if (this.inLog.isLoggedIn()) {
       return this.http.delete(this.baseUrl + `/reviews/${id}?token=${this.inLog.getUser().token}`, this.httpOptions);
     } else {
       return of(null);

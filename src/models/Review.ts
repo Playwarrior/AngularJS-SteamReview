@@ -8,6 +8,9 @@ export class Review {
     public postDate: Date,
     public edited: boolean,
     public user: string,
-    public votes: {}) {
+    public upVoteCount: number,
+    public downVoteCount: number,
+    public isUpVoted: boolean,
+    public isDownVoted: boolean) {
   }
 }

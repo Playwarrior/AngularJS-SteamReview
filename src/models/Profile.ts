@@ -4,6 +4,7 @@ export class Profile {
     public steamid: string,
     public communityvisibilitystate: number,
     public profilestate: number,
+    public personaname: string,
     public lastlogoff: number,
     public profileurl: string,
     public avatar: string,

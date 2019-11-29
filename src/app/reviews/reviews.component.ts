@@ -108,14 +108,18 @@ export class ReviewsComponent implements OnInit {
   }
 
   hasReview(): boolean {
-    if (this.reviews) {
+    return this.getUsersReview() != null;
+  }
+
+  getUsersReview() {
+    if(this.reviews) {
       for (let i = 0; i < this.reviews.length; i++) {
         let review = this.reviews[i];
         if (review.user == this.inLogService.getUser().id) {
-          return true;
+          return review;
         }
       }
     }
-    return false;
+    return null;
   }
 }

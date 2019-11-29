@@ -12,6 +12,8 @@ import {GameComponent} from './dashboard/game/game.component';
 import {ReviewsComponent} from './reviews/reviews.component';
 import { ReviewComponent } from './reviews/review/review.component';
 import { ReviewformComponent } from './reviews/reviewform/reviewform.component';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentComponent } from './comments/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ReviewformComponent } from './reviews/reviewform/reviewform.component';
     ReviewsComponent,
     ReviewComponent,
     ReviewformComponent,
+    CommentsComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

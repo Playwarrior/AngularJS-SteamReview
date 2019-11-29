@@ -11,7 +11,7 @@ import {UserService} from '../../user.service';
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.css']
 })
-export class ReviewComponent implements OnInit, AfterContentChecked {
+export class ReviewComponent implements OnInit {
 
   @Input() review: Review;
   @Input() game: Game;
@@ -60,9 +60,5 @@ export class ReviewComponent implements OnInit, AfterContentChecked {
 
   canEditDelete() {
     return this.login.getUser().id == this.review.user;
-  }
-
-  ngAfterContentChecked(): void {
-    this.changeDetector.detectChanges();
   }
 }

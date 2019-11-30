@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'Angular-SteamReview';
   profile: Profile;
 
-  constructor(public inLog: InLogService, private userService: UserService) {
+  constructor(public inLog: InLogService) {
 
   }
 }

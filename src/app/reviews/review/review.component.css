@@ -7,4 +7,6 @@ img {
   margin-left: 7.5px;
 }
 
-
+.vote-button {
+  outline: none;
+}

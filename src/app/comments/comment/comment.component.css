@@ -6,3 +6,7 @@
 p {
   color: white;
 }
+
+.vote-button {
+  outline: none;
+}

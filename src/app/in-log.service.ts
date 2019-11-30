@@ -4,6 +4,8 @@ import {User} from '../models/User';
 import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
 import {MessageService} from './message.service';
+import {UserService} from './user.service';
+import {Profile} from '../models/Profile';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,13 @@ export class InLogService {
   private baseApiUrl = 'https://steam-app-back-end.herokuapp.com/auth';
 
   private loggedIn: User;
+  private loggedInProfile: Profile;
 
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient, private message: MessageService) {
+  constructor(private http: HttpClient, private message: MessageService, private profileService: UserService) {
 
   }
 
@@ -42,6 +45,9 @@ export class InLogService {
       ).subscribe(user => {
         cb(user);
         this.loggedIn = user;
+        this.profileService.getProfile(this.loggedIn.id, (profile) => {
+          this.loggedInProfile = profile;
+        })
       });
   }
 
@@ -60,7 +66,11 @@ export class InLogService {
     return this.loggedIn != null || this.loggedIn != undefined;
   }
 
-  getUser() {
+  getUser(): User {
     return this.loggedIn;
+  }
+
+  getProfile(): Profile {
+    return this.loggedInProfile;
   }
 }

@@ -1,23 +1,23 @@
 <!-- ADD FORM CONTROL!-->
-<div class="back-ground">
+<div class="steam-back-ground">
   <div class="row shift" style="margin-top: 15px">
     <label>Email: <br/>
-      <input class="input" #email/>
+      <input class="input-steam" #email/>
     </label>
   </div>
   <div class="row shift">
     <label>Password: <br/>
-      <input class="input" #password/>
+      <input class="input-steam" #password/>
     </label>
   </div>
   <div class="row shift">
     <label>Steam: <br/>
-      <input class="input" #steam/>
+      <input class="input-steam" #steam/>
     </label>
   </div>
 
   <div class="row shift" style="margin-top: 15px">
-    <button class="register" (click)="register(email.value, password.value, steam.value)">
+    <button class="btn-steam" (click)="register(email.value, password.value, steam.value)">
       <span>Register</span>
     </button>
   </div>

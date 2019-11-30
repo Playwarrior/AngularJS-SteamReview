@@ -40,16 +40,13 @@
       <app-comment [comment]="getComment(i)" [profile]="getProfile(i)"></app-comment>
     </div>
   </div>
-  <div *ngIf="comments.length === 0">
-    <p>No comments found!</p>
-  </div>
   <div class="steam-back-ground" style="margin-top: 10px">
     <div class="row">
       <div class="col-12">
         <form [formGroup]="commentGroup">
           <div>
             <label>
-              <textarea class="input big-input" type="text" formControlName="content"></textarea>
+              <textarea class="input-steam big-input" type="text" formControlName="content"></textarea>
             </label>
           </div>
           <div>

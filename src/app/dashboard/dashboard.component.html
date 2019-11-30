@@ -1,10 +1,10 @@
 <div *ngIf="inLog.isLoggedIn()" style="margin-top: 10px">
   <div class="row">
-    <div class="col-12">
+    <div class="mx-auto" style="display: inline-block;">
       <label>
-        <input #searchBox class="input" type="text"/>
+        <input #searchBox class="input-steam" type="text"/>
       </label>
-      <button type="submit" class="login d-inline-block" (click)="search(searchBox.value)"><span>Search</span></button>
+      <button type="submit" class="btn-steam d-inline-block" (click)="search(searchBox.value)"><span>Search</span></button>
     </div>
   </div>
   <div *ngIf="gameList">

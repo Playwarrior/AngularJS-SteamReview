@@ -30,7 +30,7 @@ export class CommentService {
 
   postComment(reviewId, content) {
     if (this.loginService.isLoggedIn()) {
-      return this.http.post(this.baseApiUrl + `reviews/${reviewId}/comment?token=${this.loginService.getUser().token}`, {
+      return this.http.post<Comment>(this.baseApiUrl + `reviews/${reviewId}/comment?token=${this.loginService.getUser().token}`, {
         content: content
       }, this.httpOptions);
     } else {

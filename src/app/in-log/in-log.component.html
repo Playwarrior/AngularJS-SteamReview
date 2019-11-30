@@ -1,17 +1,17 @@
 <div class="col-8">
-  <div class="white-back-ground">
+  <div class="steam-back-ground">
     <div class="row shift" style="margin-top: 10px;">
       <label>Email <br />
-        <input class="input" #email/>
+        <input class="input-steam" #email/>
       </label>
     </div>
     <div class="row shift">
       <label>Password <br/>
-        <input class="input" type="password" #password/>
+        <input class="input-steam" type="password" #password/>
       </label>
     </div>
     <div class="row shift">
-      <button class="login" (click)="logIn(email.value, password.value)"><span>Login</span></button>
+      <button class="btn-steam" (click)="logIn(email.value, password.value)"><span>Login</span></button>
     </div>
     <div class="row shift">
       <label class="alert-danger">{{message.get('login')}}</label>

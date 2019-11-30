@@ -133,7 +133,9 @@ export class CommentsComponent implements OnInit {
   post() {
     if (this.review && this.commentGroup.valid) {
       let value = this.commentGroup.value;
-      this.commentService.postComment(this.review._id, value.content).subscribe((object) => {
+      this.commentService.postComment(this.review._id, value.content).subscribe((comment) => {
+        this.comments.push(comment);
+        this.getProfileAsync(comment.user, this.profiles.length);
         this.commentGroup.get('content').setValue('');
       });
     }

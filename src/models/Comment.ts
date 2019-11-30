@@ -1,6 +1,7 @@
 export class Comment {
 
   constructor(
+    public _id: string,
     public user: string,
     public content: string,
     public postDate: Date,
@@ -10,5 +11,12 @@ export class Comment {
     public isUpVoted: boolean,
     public isDownVoted: boolean
   ) {
+  }
+
+  upVote() {
+  }
+
+  downVote() {
+
   }
 }

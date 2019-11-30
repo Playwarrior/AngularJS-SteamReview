@@ -13,6 +13,11 @@ label {
   margin: 4px 0;
 }
 
+.big-input {
+  width: 700px;
+  height: 150px;
+}
+
 .btn-steam > span {
   padding: 0 15px;
   font-size: 15px;
@@ -42,11 +47,6 @@ h2 {
 .shift {
   margin-left: 35px;
   margin-bottom: 10px;
-}
-
-.big-input {
-  width: 700px;
-  height: 150px;
 }
 
 .back-ground-steam {

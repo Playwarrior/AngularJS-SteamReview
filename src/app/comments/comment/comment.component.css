@@ -1,0 +1,74 @@
+.steam-back-ground {
+  background-color: rgba(32, 47, 67, 0.8);;
+  border-radius: 3px;
+  width: 800px;
+  align-content: center;
+  box-shadow: 0 0 5px #000;
+  padding: 5px;
+}
+
+.review-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.profile-img {
+  border-radius: 3px;
+  margin-top: 5px;
+}
+
+.vote-image {
+  margin: 0;
+}
+
+.vote-button {
+  background-color: transparent;
+  border: none;
+  display: inline-block;
+  outline: none;
+}
+
+.input {
+  background-color: rgba( 0, 0, 0, 0.2 );
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 3px;
+  box-shadow: 1px 1px 0 #45556c;
+  width: 300px;
+  padding: 5px;
+  margin: 4px 0;
+}
+
+.big-input {
+  width: 790px;
+  height: 150px;
+}
+
+.btn-steam:disabled {
+  background-color: #171a21;
+}
+
+.btn-steam > span {
+  padding: 0 15px;
+  font-size: 15px;
+  line-height: 30px;
+  display: block;
+  background: transparent;
+}
+
+.btn-steam {
+  border-radius: 2px;
+  border: none;
+  padding: 1px;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #67c1f5;
+  background: rgba( 103, 193, 245, 0.2 );
+}
+
+p {
+  color: white;
+}

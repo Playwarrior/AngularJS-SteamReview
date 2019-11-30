@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../user.service';
 import {clone} from '../../util/cloning';
 import {Profile} from '../../models/Profile';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-reviews',

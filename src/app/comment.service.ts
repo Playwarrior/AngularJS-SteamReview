@@ -9,7 +9,7 @@ import {InLogService} from './in-log.service';
 })
 export class CommentService {
 
-  private baseApiUrl = 'https://steam-app-back-end.herokuapp.com/apiv1/comments';
+  private baseApiUrl = 'https://steam-app-back-end.herokuapp.com/apiv1/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -22,7 +22,41 @@ export class CommentService {
 
   getComments(reviewId) {
     if (this.loginService.isLoggedIn()) {
-      return this.http.get<Comment[]>(this.baseApiUrl + `/${reviewId}?token=${this.loginService.getUser().token}`, this.httpOptions);
+      return this.http.get<Comment[]>(this.baseApiUrl + `comments/${reviewId}?token=${this.loginService.getUser().token}`, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
+
+  postComment(reviewId, content) {
+    if (this.loginService.isLoggedIn()) {
+      return this.http.post(this.baseApiUrl + `reviews/${reviewId}/comment?token=${this.loginService.getUser().token}`, {
+        content: content
+      }, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
+
+  upVoteComment(id) {
+    if (this.loginService.isLoggedIn()) {
+      return this.http.put(this.baseApiUrl + `comments/${id}/upvote?token=${this.loginService.getUser().token}`, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
+
+  downVoteComment(id) {
+    if (this.loginService.isLoggedIn()) {
+      return this.http.put(this.baseApiUrl + `comments/${id}/downvote?token=${this.loginService.getUser().token}`, this.httpOptions);
+    } else {
+      return of(null);
+    }
+  }
+
+  deleteComment(id) {
+    if(this.loginService.isLoggedIn()) {
+      return this.http.delete(this.baseApiUrl + `comments/${id}?token=${this.loginService.getUser().token}`, this.httpOptions);
     } else {
       return of(null);
     }

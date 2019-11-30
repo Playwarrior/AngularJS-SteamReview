@@ -1,5 +1,12 @@
-<div *ngIf="review">
-  <div class="row steam-back-ground">
+<div *ngIf="review && comments">
+  <div class="row">
+    <div class="col-1">
+      <button class="vote-button" (click)="goBack()">
+        <img src="../../assets/arrow-left.png" alt="" width="40" height="40"/>
+      </button>
+    </div>
+  </div>
+  <div class="row steam-back-ground" style="margin: 0">
     <div class="col-1">
       <button class="vote-button" (click)="upVote()" style="margin-top: 5px;">
         <img *ngIf="review.isUpVoted" src="../../assets/upvote-arrow-lit.png" alt="" class="vote-image" width="30"
@@ -7,7 +14,7 @@
         <img *ngIf="!review.isUpVoted" src="../../assets/upvote-arrow.png" alt="" class="vote-image" width="30"
              height="30"/>
       </button>
-      <p style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+      <p style="text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 5px;">
         {{review.upVoteCount - review.downVoteCount}}
       </p>
       <button (click)="downVote()" class="vote-button">
@@ -28,23 +35,39 @@
       </div>
     </div>
   </div>
-  <div *ngIf="comments">
+  <div *ngIf="comments.length > 0">
     <div *ngFor="let j of counter(); let i = index" class="row">
-      <div class="col-1"></div>
       <app-comment [comment]="getComment(i)" [profile]="getProfile(i)"></app-comment>
-      <div class="col-1"></div>
     </div>
+  </div>
+  <div *ngIf="comments.length === 0">
+    <p>No comments found!</p>
+  </div>
+  <div class="steam-back-ground" style="margin-top: 10px">
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]="commentGroup">
+          <div>
+            <label>
+              <textarea class="input big-input" type="text" formControlName="content"></textarea>
+            </label>
+          </div>
+          <div>
+            <button class="btn-steam" type="submit" (click)="post()" [disabled]="!commentGroup.valid"><span>post</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="comments.length > 0">
     <div class="row">
       <div class="mx-auto" style="display: inline-block; margin-top: 5px;">
-        <button class="btn-steam align-self-center" style="margin-right: 5px;"
-                [disabled]="!hasPreviousPage()" (click)="previousPage()"><span><</span></button>
-
+        <button class="btn-steam align-self-center" style="margin-right: 5px;" [disabled]="!hasPreviousPage()"
+                (click)="previousPage()"><span><</span></button>
         <button class="btn-steam align-self-center" [disabled]="!hasNextPage()" (click)="nextPage()"><span>></span>
         </button>
       </div>
     </div>
-  </div>
-  <div *ngIf="!comments">
-    <p>No comments found!</p>
   </div>
 </div>

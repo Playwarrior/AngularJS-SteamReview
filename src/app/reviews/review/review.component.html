@@ -6,7 +6,7 @@
       <img *ngIf="!review.isUpVoted" src="../../../assets/upvote-arrow.png" alt="" class="vote-image" width="30"
            height="30"/>
     </button>
-    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 5px">
       {{review.upVoteCount - review.downVoteCount}}
     </p>
     <button (click)="downVote()" class="vote-button">

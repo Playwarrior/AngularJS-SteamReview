@@ -7,6 +7,8 @@ import {ReviewService} from '../review.service';
 import {InLogService} from '../in-log.service';
 import {UserService} from '../user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-comments',
@@ -16,8 +18,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class CommentsComponent implements OnInit {
 
   maxPage: number;
-  limit: number;
-  page: number;
+  limit: number = 15;
+  page: number = 1;
 
   review: Review;
   reviewProfile: Profile;
@@ -25,12 +27,16 @@ export class CommentsComponent implements OnInit {
   comments: Comment[] = [];
   profiles: Profile[] = [];
 
-  constructor(private commentService: CommentService, private reviewService: ReviewService, private loginService: InLogService, private profileService: UserService, private route: ActivatedRoute, private router: Router) {
+  commentGroup: FormGroup = new FormGroup({
+    content: new FormControl('', Validators.required)
+  });
+
+  constructor(private commentService: CommentService, private reviewService: ReviewService, private loginService: InLogService, private profileService: UserService, private route: ActivatedRoute, private router: Router, private location: Location) {
 
   }
 
   ngOnInit() {
-    if(this.loginService.isLoggedIn()) {
+    if (this.loginService.isLoggedIn()) {
       const params = this.route.snapshot.paramMap;
 
       let id = params.get(params.keys[0]);
@@ -53,7 +59,7 @@ export class CommentsComponent implements OnInit {
           index++;
         });
       });
-    }else {
+    } else {
       this.router.navigate(['']);
     }
   }
@@ -89,11 +95,11 @@ export class CommentsComponent implements OnInit {
   }
 
   getProfile(index): Profile {
-    return this.profiles[(this.page * this.limit) + index];
+    return this.profiles[((this.page - 1) * this.limit) + index];
   }
 
   getComment(index): Comment {
-    return this.comments[(this.page * this.limit) + index];
+    return this.comments[((this.page - 1) * this.limit) + index];
   }
 
   upVote() {
@@ -122,5 +128,18 @@ export class CommentsComponent implements OnInit {
         }
       });
     }
+  }
+
+  post() {
+    if (this.review && this.commentGroup.valid) {
+      let value = this.commentGroup.value;
+      this.commentService.postComment(this.review._id, value.content).subscribe((object) => {
+        this.commentGroup.get('content').setValue('');
+      });
+    }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

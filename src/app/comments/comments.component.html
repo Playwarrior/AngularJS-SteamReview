@@ -25,7 +25,9 @@
       </button>
     </div>
     <div *ngIf="reviewProfile" class="col-2">
-      <img class="profile-img" src="{{reviewProfile.avatarfull}}" width="100" height="100" alt=""/>
+      <a routerLink="/profile/{{reviewProfile.id}}">
+        <img class="profile-img" src="{{reviewProfile.avatarfull}}" width="100" height="100" alt=""/>
+      </a>
     </div>
     <div class="col-9">
       <h3>{{review.title}}</h3>

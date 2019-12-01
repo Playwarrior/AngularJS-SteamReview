@@ -1,0 +1,27 @@
+<div>
+  <div class="row">
+    <div class="col-1">
+      <button (click)="goBack()" class="vote-button">
+        <img src="../../assets/arrow-left.png" width="40" height="40" alt=""/>
+      </button>
+    </div>
+    <div>
+
+    </div>
+  </div>
+  <div *ngIf="profile">
+    <div class="row steam-back-ground">
+      <div class="col-4">
+        <img src="{{profile.avatarfull}}" alt=""/>
+      </div>
+      <div class="col-8">
+        <h3>{{profile.personaname}}</h3>
+      </div>
+    </div>
+    <div style="margin-top: 10px">
+      <div *ngFor="let review of reviews; let i = index" class="row" style="margin-left: 1px; margin-top: 10px">
+        <app-review [review]="review" [profile]="getProfile(i)"></app-review>
+      </div>
+    </div>
+  </div>
+</div>

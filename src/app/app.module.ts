@@ -14,6 +14,8 @@ import { ReviewComponent } from './reviews/review/review.component';
 import { ReviewformComponent } from './reviews/reviewform/reviewform.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentComponent } from './comments/comment/comment.component';
+import { ProfilesComponent } from './profiles/profiles.component';
+import { ProfileDashboardComponent } from './profiles/profile-dashboard/profile-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { CommentComponent } from './comments/comment/comment.component';
     ReviewformComponent,
     CommentsComponent,
     CommentComponent,
+    ProfilesComponent,
+    ProfileDashboardComponent,
   ],
   imports: [
     BrowserModule,

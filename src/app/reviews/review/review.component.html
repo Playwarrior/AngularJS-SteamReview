@@ -17,7 +17,9 @@
     </button>
   </div>
   <div *ngIf="profile" class="col-2">
-    <img class="profile-img" src="{{profile.avatarfull}}" width="100" height="100" alt=""/>
+    <a routerLink="/profile/{{profile.id}}">
+      <img class="profile-img" src="{{profile.avatarfull}}" width="100" height="100" alt=""/>
+    </a>
   </div>
   <div class="col-8">
     <a routerLink="/review/{{review._id}}">

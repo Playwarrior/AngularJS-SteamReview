@@ -14,10 +14,9 @@ import {UserService} from '../../user.service';
 export class ReviewComponent implements OnInit {
 
   @Input() review: Review;
-  @Input() game: Game;
   @Input() profile: Profile;
 
-  constructor(private login: InLogService, private reviewService: ReviewService, private userService: UserService, private changeDetector: ChangeDetectorRef) {
+  constructor(private login: InLogService, private reviewService: ReviewService) {
 
   }
 
@@ -59,6 +58,6 @@ export class ReviewComponent implements OnInit {
   }
 
   canEditDelete() {
-    return this.login.getUser().id == this.review.user;
+    return this.login.isLoggedIn() && this.login.getUser().id == this.review.user;
   }
 }

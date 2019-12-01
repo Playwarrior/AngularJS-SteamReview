@@ -25,7 +25,7 @@
     <div *ngIf="reviews.length > 0">
       <div *ngFor="let j of counter(); let i = index">
         <div style="margin-bottom: 10px">
-          <app-review [review]="getReview(i)" [game]="game" [profile]="getProfile(i)"></app-review>
+          <app-review [review]="getReview(i)" [profile]="getProfile(i)"></app-review>
         </div>
       </div>
 

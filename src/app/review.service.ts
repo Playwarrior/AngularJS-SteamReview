@@ -10,6 +10,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class ReviewService {
 
   baseUrl = 'https://steam-app-back-end.herokuapp.com/apiv1';
+  baseUrlNonToken = 'https://steam-app-back-end.herokuapp.com/apiv2';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -33,6 +34,15 @@ export class ReviewService {
       return this.http.get<Review>(this.baseUrl + '/review/' + id + `?token=${this.inLog.getUser().token}`, this.httpOptions);
     } else {
       of(null);
+    }
+  }
+
+  getReviewsByUser(id: string): Observable<Review[]> {
+    console.log('WOW');
+    if (this.inLog.isLoggedIn()) {
+      return this.http.get<Review[]>(this.baseUrl + `/users/${id}/reviews?token=${this.inLog.getUser().token}`, this.httpOptions);
+    } else {
+      return this.http.get<Review[]>(this.baseUrlNonToken + `/users/${id}/reviews`, this.httpOptions);
     }
   }
 

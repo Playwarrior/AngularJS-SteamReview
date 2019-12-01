@@ -6,6 +6,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ReviewsComponent} from './reviews/reviews.component';
 import {ReviewformComponent} from './reviews/reviewform/reviewform.component';
 import {CommentsComponent} from './comments/comments.component';
+import {ProfilesComponent} from './profiles/profiles.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'reviews/:id', component: ReviewsComponent},
   {path: 'reviews/:appid/new', component: ReviewformComponent},
   {path: 'reviews/:appid/:id', component: ReviewformComponent},
-  {path: 'review/:id', component: CommentsComponent}
+  {path: 'review/:id', component: CommentsComponent},
+  {path: 'profile/:id', component: ProfilesComponent}
 ];
 
 @NgModule({

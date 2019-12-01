@@ -1,6 +1,7 @@
 export class Profile {
 
   constructor(
+    public id: string,
     public steamid: string,
     public communityvisibilitystate: number,
     public profilestate: number,

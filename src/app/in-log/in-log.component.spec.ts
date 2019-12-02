@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InLogComponent } from './in-log.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('InLogComponent', () => {
   let component: InLogComponent;
@@ -10,7 +11,7 @@ describe('InLogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[HttpClientModule, RouterTestingModule],
+      imports:[HttpClientModule, RouterTestingModule, ReactiveFormsModule],
       declarations: [ InLogComponent ]
     })
     .compileComponents();

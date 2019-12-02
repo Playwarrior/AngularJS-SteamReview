@@ -53,7 +53,7 @@ export class ReviewformComponent implements OnInit {
         }
       });
     } else {
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
     }
   }
 

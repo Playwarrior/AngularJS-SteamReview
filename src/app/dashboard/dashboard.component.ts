@@ -37,19 +37,17 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.inLog.isLoggedIn()) {
-      this.router.navigate(['/login']);
-
-    } else {
+    if (this.inLog.isLoggedIn()) {
       this.gamesService.getGames((games) => {
         this.games = clone<Game>(games);
         this.gameList = clone<Game>(games);
       });
-      this.cdRef.detectChanges();
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
-  getGameRow(index) : Game[] {
+  getGameRow(index): Game[] {
     return [this.gameList[index * 4], this.gameList[index * 4 + 1], this.gameList[index * 4 + 2], this.gameList[index * 4 + 3]];
   }
 

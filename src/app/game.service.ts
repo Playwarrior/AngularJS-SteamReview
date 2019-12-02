@@ -27,7 +27,9 @@ export class GameService {
   getGames(cb) {
     if (this.inLog.isLoggedIn()) {
       return this.http.get<Game[]>(this.urlBase + `?token=${this.inLog.getUser().token}`, this.httpOptions).subscribe(games => {
-        games.forEach(game => this.games.push(game));
+        if (games) {
+          games.forEach(game => this.games.push(game));
+        }
         cb(games);
       });
     } else {
@@ -44,7 +46,7 @@ export class GameService {
           cb(game);
         });
       } else {
-        cb(this.games.filter(game => game.appid == appId)[0]);
+        cb(this.games.filter(game => game && game.appid == appId)[0]);
       }
     } else {
       this.http.get<Game>(this.nonUrlBase + `${id}/games/${appId}`, this.httpOptions).subscribe((game) => {
@@ -55,6 +57,6 @@ export class GameService {
   }
 
   private hasGame(appId: string): boolean {
-    return this.games != null && this.games.filter(game => game.appid == appId).length > 0;
+    return this.games != null && this.games.filter(game => game && game.appid == appId).length > 0;
   }
 }

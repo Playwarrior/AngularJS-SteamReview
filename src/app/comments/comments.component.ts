@@ -40,24 +40,26 @@ export class CommentsComponent implements OnInit {
 
     let id = params.get(params.keys[0]);
 
-    this.reviewService.getReview(id.toString()).subscribe((review) => {
-      this.review = review;
+    if (id) {
+      this.reviewService.getReview(id.toString()).subscribe((review) => {
+        this.review = review;
 
-      this.profileService.getProfile(review.user, (profile) => {
-        this.reviewProfile = profile;
+        this.profileService.getProfile(review.user, (profile) => {
+          this.reviewProfile = profile;
+        });
       });
-    });
 
-    this.commentService.getComments(id.toString()).subscribe((comments) => {
-      this.comments = comments;
-      this.maxPage = Math.ceil(comments.length / 15);
+      this.commentService.getComments(id.toString()).subscribe((comments) => {
+        this.comments = comments;
+        this.maxPage = Math.ceil(comments.length / 15);
 
-      let index = 0;
-      comments.forEach((c) => {
-        this.getProfileAsync(c.user, index);
-        index++;
+        let index = 0;
+        comments.forEach((c) => {
+          this.getProfileAsync(c.user, index);
+          index++;
+        });
       });
-    });
+    }
   }
 
   getProfileAsync(user, index) {

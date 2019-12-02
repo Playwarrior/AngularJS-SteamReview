@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Profile} from '../../../models/Profile';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-dashboard.component.css']
 })
 export class ProfileDashboardComponent implements OnInit {
+
+  profile: Profile[];
 
   constructor() { }
 

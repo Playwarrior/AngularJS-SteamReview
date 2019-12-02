@@ -53,6 +53,7 @@ export class InLogService {
 
   logout(){
     this.loggedIn = null;
+    this.loggedInProfile = null;
   }
 
   handleError<T>(operation = 'operation', result?: T) {

@@ -309,8 +309,15 @@
   <div class="spacer"></div>
 
   <a *ngIf="!inLog.isLoggedIn()" routerLink="/register">Register</a>
-  <div *ngIf="inLog.isLoggedIn() && inLog.getProfile() != null">
-    <img src="{{inLog.getProfile().avatarmedium}}" class="profile-img" width="45" alt="Profile Pic" style="margin-top: 3px"/>
+  <div *ngIf="inLog.isLoggedIn() && inLog.getProfile() != null" class="dropdown">
+    <button class="vote-button dropbtn">
+      <img src="{{inLog.getProfile().avatarmedium}}" class="profile-img" width="45" alt="Profile Pic"
+           style="margin-top: 3px"/>
+    </button>
+    <div class="dropdown-content">
+      <a routerLink="/profile/{{inLog.getUser().id}}">profile</a>
+      <button class="vote-button" (click)="logout()">Log out</button>
+    </div>
   </div>
 
   <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">

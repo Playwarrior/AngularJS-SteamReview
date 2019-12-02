@@ -11,7 +11,9 @@ import {clone} from '../util/cloning';
 export class GameService {
 
   private urlBase: string = 'https://steam-app-back-end.herokuapp.com/apiv1/users/games';
-  private games: Game[];
+  private nonUrlBase: string = 'https://steam-app-back-end.herokuapp.com/apiv2/users/';
+
+  private games: Game[] = [];
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -24,21 +26,17 @@ export class GameService {
 
   getGames(cb) {
     if (this.inLog.isLoggedIn()) {
-      if (this.games === null || this.games === undefined) {
-        return this.http.get<Game[]>(this.urlBase + `?token=${this.inLog.getUser().token}`, this.httpOptions).subscribe(games => {
-          this.games = clone<Game>(games);
-          cb(games);
-        });
-      } else {
-        cb(clone<Game>(this.games));
-      }
+      return this.http.get<Game[]>(this.urlBase + `?token=${this.inLog.getUser().token}`, this.httpOptions).subscribe(games => {
+        games.forEach(game => this.games.push(game));
+        cb(games);
+      });
     } else {
       this.games = null;
       return of(null);
     }
   }
 
-  getGame(appId: string, cb) {
+  getGame(appId: string, id: string, cb) {
     if (this.inLog.isLoggedIn()) {
       if (!this.hasGame(appId)) {
         this.http.get<Game>(this.urlBase + `/${appId}?token=${this.inLog.getUser().token}`, this.httpOptions).subscribe(game => {
@@ -49,8 +47,10 @@ export class GameService {
         cb(this.games.filter(game => game.appid == appId)[0]);
       }
     } else {
-      this.games = null;
-      cb(null);
+      this.http.get<Game>(this.nonUrlBase + `${id}/games/${appId}`, this.httpOptions).subscribe((game) => {
+        this.games.push(game);
+        cb(game);
+      });
     }
   }
 

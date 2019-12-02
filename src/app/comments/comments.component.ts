@@ -31,37 +31,33 @@ export class CommentsComponent implements OnInit {
     content: new FormControl('', Validators.required)
   });
 
-  constructor(private commentService: CommentService, private reviewService: ReviewService, private loginService: InLogService, private profileService: UserService, private route: ActivatedRoute, private router: Router, private location: Location) {
+  constructor(private commentService: CommentService, private reviewService: ReviewService, public loginService: InLogService, private profileService: UserService, private route: ActivatedRoute, private router: Router, private location: Location) {
 
   }
 
   ngOnInit() {
-    if (this.loginService.isLoggedIn()) {
-      const params = this.route.snapshot.paramMap;
+    const params = this.route.snapshot.paramMap;
 
-      let id = params.get(params.keys[0]);
+    let id = params.get(params.keys[0]);
 
-      this.reviewService.getReview(id.toString()).subscribe((review) => {
-        this.review = review;
+    this.reviewService.getReview(id.toString()).subscribe((review) => {
+      this.review = review;
 
-        this.profileService.getProfile(review.user, (profile) => {
-          this.reviewProfile = profile;
-        });
+      this.profileService.getProfile(review.user, (profile) => {
+        this.reviewProfile = profile;
       });
+    });
 
-      this.commentService.getComments(id.toString()).subscribe((comments) => {
-        this.comments = comments;
-        this.maxPage = Math.ceil(comments.length / 15);
+    this.commentService.getComments(id.toString()).subscribe((comments) => {
+      this.comments = comments;
+      this.maxPage = Math.ceil(comments.length / 15);
 
-        let index = 0;
-        comments.forEach((c) => {
-          this.getProfileAsync(c.user, index);
-          index++;
-        });
+      let index = 0;
+      comments.forEach((c) => {
+        this.getProfileAsync(c.user, index);
+        index++;
       });
-    } else {
-      this.router.navigate(['']);
-    }
+    });
   }
 
   getProfileAsync(user, index) {

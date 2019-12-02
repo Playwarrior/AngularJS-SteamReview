@@ -306,9 +306,11 @@
     />
     <span>Welcome</span>
   </a>
+  <a routerLink="/profiles" style="margin-left: 15px; margin-bottom: 3px">Profiles</a>
   <div class="spacer"></div>
 
-  <a *ngIf="!inLog.isLoggedIn()" routerLink="/register">Register</a>
+  <a *ngIf="!inLog.isLoggedIn()" routerLink="/register" style="margin: 5px">Register</a>
+  <a *ngIf="!inLog.isLoggedIn()" routerLink="/login" style="margin: 5px">Login</a>
   <div *ngIf="inLog.isLoggedIn() && inLog.getProfile() != null" class="dropdown">
     <button class="vote-button dropbtn">
       <img src="{{inLog.getProfile().avatarmedium}}" class="profile-img" width="45" alt="Profile Pic"

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Profile} from '../../../models/Profile';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -8,11 +9,27 @@ import {Profile} from '../../../models/Profile';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  profile: Profile[];
+  profile: Profile[] = [];
 
-  constructor() { }
+  constructor(private profileService: UserService) {
+  }
 
   ngOnInit() {
+    this.profileService.getProfiles((ids) => {
+      for (let id of ids) {
+        this.profileService.getProfile(id._id, (profile) => {
+          this.profile.push(profile);
+        });
+      }
+    });
+  }
+
+  counter() {
+    return new Array(Math.ceil(this.profile.length / 4));
+  }
+
+  getProfiles(index) {
+    return [this.profile[index * 4], this.profile[index * 4 + 1], this.profile[index * 4 + 2], this.profile[index * 4 + 3]];
   }
 
 }

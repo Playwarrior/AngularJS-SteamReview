@@ -10,6 +10,7 @@ import {InLogService} from './in-log.service';
 export class CommentService {
 
   private baseApiUrl = 'https://steam-app-back-end.herokuapp.com/apiv1/';
+  private nonTokenBaseURL = 'https://steam-app-back-end.herokuapp.com/apiv2/comments/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -24,7 +25,7 @@ export class CommentService {
     if (this.loginService.isLoggedIn()) {
       return this.http.get<Comment[]>(this.baseApiUrl + `comments/${reviewId}?token=${this.loginService.getUser().token}`, this.httpOptions);
     } else {
-      return of(null);
+      return this.http.get<Comment[]>(this.nonTokenBaseURL + reviewId, this.httpOptions);
     }
   }
 

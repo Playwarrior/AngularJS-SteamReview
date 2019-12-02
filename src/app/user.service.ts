@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class UserService {
 
-  private readonly baseUrl: string = 'https://steam-app-back-end.herokuapp.com/apiv2/users/profile/';
+  private readonly baseUrl: string = 'https://steam-app-back-end.herokuapp.com/apiv2/users/';
 
   private profiles: Profile[] = [];
 
@@ -24,16 +24,23 @@ export class UserService {
 
   getProfile(id, cb) {
     if (this.hasProfile(id)) {
-      cb(this.profiles.filter(profile => profile.steamid == id)[0]);
+      cb(this.profiles.filter(profile => profile.id == id)[0]);
     } else {
-      this.http.get<Profile>(this.baseUrl + id, this.httpOptions).subscribe((profile) => {
+      this.http.get<Profile>(this.baseUrl + 'profile/' + id, this.httpOptions).subscribe((profile) => {
         this.profiles.push(profile);
         cb(profile);
-      })
+      });
     }
   }
 
   hasProfile(id) {
-    return this.profiles.filter(profile => profile.steamid == id).length > 0;
+    return this.profiles.filter(profile => profile.id == id).length > 0;
+  }
+
+  getProfiles(cb) {
+    this.http.get(this.baseUrl, this.httpOptions).subscribe((object) => {
+      let body = JSON.parse(JSON.stringify(object));
+      return cb(body);
+    });
   }
 }

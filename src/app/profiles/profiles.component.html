@@ -18,9 +18,16 @@
         <h3>{{profile.personaname}}</h3>
       </div>
     </div>
-    <div style="margin-top: 10px">
-      <div *ngFor="let review of reviews; let i = index" class="row" style="margin-left: 1px; margin-top: 10px">
-        <app-review [review]="review" [profile]="getProfile(i)"></app-review>
+    <div *ngIf="reviews">
+      <div *ngIf="reviews.length > 0" style="margin-top: 10px">
+        <div *ngFor="let review of reviews; let i = index" class="row" style="margin-left: 1px; margin-top: 10px">
+          <app-review [review]="review" [profile]="getProfile(i)" [game]="getGame(i)"></app-review>
+        </div>
+      </div>
+      <div *ngIf="reviews.length === 0" class="row steam-back-ground" style="margin-top: 10px">
+        <div class="col-12">
+          <h3 style="text-align: center">No reviews found!</h3>
+        </div>
       </div>
     </div>
   </div>

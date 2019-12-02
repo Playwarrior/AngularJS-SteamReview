@@ -1,1 +1,14 @@
-<p>profile-dashboard works!</p>
+<div class="row">
+  <div class="col-12">
+    <h3 class="align-self-center text-center" style="width: 100%; height: 100%; display: inline-block; color: white">Profiles</h3>
+  </div>
+</div>
+<div *ngIf="profile.length > 0">
+  <div *ngFor="let j of counter(); let i = index" class="row">
+    <div *ngFor="let profile of getProfiles(i)" class="col-3">
+      <a *ngIf="profile" routerLink="/profile/{{profile.id}}">
+        <img src="{{profile.avatarfull}}" alt="" width="150" height="150" class="profile-img"/>
+      </a>
+    </div>
+  </div>
+</div>

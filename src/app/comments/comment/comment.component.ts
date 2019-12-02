@@ -54,7 +54,7 @@ export class CommentComponent implements OnInit {
   }
 
   canEditDelete() {
-    return this.login.getUser().id == this.comment.user;
+    return this.login.isLoggedIn() && this.login.getUser().id == this.comment.user;
   }
 
   delete() {

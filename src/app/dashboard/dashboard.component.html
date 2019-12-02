@@ -4,13 +4,13 @@
       <label>
         <input #searchBox class="input-steam" type="text"/>
       </label>
-      <button type="submit" class="btn-steam d-inline-block" (click)="search(searchBox.value)"><span>Search</span></button>
+      <button type="submit" style="margin-left: 5px; margin-top: 2px; display: inline-block" class="btn-steam" (click)="search(searchBox.value)"><span>Search</span></button>
     </div>
   </div>
   <div *ngIf="gameList">
     <div *ngFor="let j of counter(); let i =  index" class="row">
       <div *ngFor="let game of getGameRow(i)" class="col-3">
-        <a routerLink="/reviews/{{game.appid}}">
+        <a *ngIf="game" routerLink="/reviews/{{game.appid}}">
           <app-game [game]="game"></app-game>
         </a>
       </div>

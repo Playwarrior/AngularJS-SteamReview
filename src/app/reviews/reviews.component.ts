@@ -41,7 +41,7 @@ export class ReviewsComponent implements OnInit {
   getData() {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.gameService.getGame(id.toString(), (game) => {
+    this.gameService.getGame(id.toString(), null,(game) => {
       this.game = game;
     });
 
@@ -70,7 +70,7 @@ export class ReviewsComponent implements OnInit {
 
   ngOnInit() {
     if (!this.inLogService.isLoggedIn()) {
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
     } else {
       this.getData();
     }

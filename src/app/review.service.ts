@@ -33,12 +33,11 @@ export class ReviewService {
     if (this.inLog.isLoggedIn()) {
       return this.http.get<Review>(this.baseUrl + '/review/' + id + `?token=${this.inLog.getUser().token}`, this.httpOptions);
     } else {
-      of(null);
+      return this.http.get<Review>(this.baseUrlNonToken + `/reviews/${id}`, this.httpOptions);
     }
   }
 
   getReviewsByUser(id: string): Observable<Review[]> {
-    console.log('WOW');
     if (this.inLog.isLoggedIn()) {
       return this.http.get<Review[]>(this.baseUrl + `/users/${id}/reviews?token=${this.inLog.getUser().token}`, this.httpOptions);
     } else {

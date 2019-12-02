@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col-12 back-ground-steam">
+  <div class="col-12 steam-back-ground">
     <h2 class="shift" *ngIf="game">Editing review for {{game.name}}</h2>
     <form [formGroup]="reviewForm" class="shift">
       <div class="form-group" style="margin: 10px">
         <label for="title">Title <br/>
-          <input class="input-steam" type="text" formControlName="title"/>
+          <input class="input-steam" type="text" formControlName="title" maxlength="25"/>
         </label>
         <div class="text-warning"
-             *ngIf="(this.reviewForm.get('title').touched || this.reviewForm.get('title').dirty && this.reviewForm.get('title').errors?.required)">
+             *ngIf="(this.reviewForm.get('title').touched && this.reviewForm.get('title').errors?.required)">
           Title is required!
         </div>
       </div>
@@ -16,20 +16,20 @@
           <textarea class="input-steam big-input" type="text" formControlName="content"></textarea>
         </label>
         <div class="text-warning"
-             *ngIf="(this.reviewForm.get('content').touched || this.reviewForm.get('content').dirty && this.reviewForm.get('content').errors?.required)">
+             *ngIf="(this.reviewForm.get('content').touched && this.reviewForm.get('content').errors?.required)">
           Content is required!
         </div>
       </div>
       <div *ngIf="!review" class="d-inline">
-        <button class="btn-steam" type="submit" (click)="post()" [disabled]="!reviewForm.valid"><span>post</span>
+        <button class="btn-steam" style="margin-left: 10px" type="submit" (click)="post()" [disabled]="!reviewForm.valid"><span>post</span>
         </button>
       </div>
-      <div *ngIf="review" class="d-inline">
+      <div *ngIf="review" class="d-inline" style="margin-left: 20px">
         <button class="btn-steam" type="submit" (click)="update()" [disabled]="!reviewForm.valid"><span>update</span>
         </button>
       </div>
       <div class="d-inline">
-        <button class="btn-steam" (click)="goBack()"><span>go back</span></button>
+        <button class="btn-steam" style="margin-left: 10px" (click)="goBack()"><span>go back</span></button>
       </div>
     </form>
   </div>

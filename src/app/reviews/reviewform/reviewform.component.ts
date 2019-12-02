@@ -47,7 +47,7 @@ export class ReviewformComponent implements OnInit {
         }));
       }
 
-      this.gameService.getGame(this.appId, (game) => {
+      this.gameService.getGame(this.appId, null,(game) => {
         if (game) {
           this.game = game;
         }

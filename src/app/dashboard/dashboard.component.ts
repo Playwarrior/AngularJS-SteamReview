@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     if (!this.inLog.isLoggedIn()) {
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
 
     } else {
       this.gamesService.getGames((games) => {

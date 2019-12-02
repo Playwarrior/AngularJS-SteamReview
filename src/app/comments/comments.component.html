@@ -1,3 +1,4 @@
+<script src="comments.component.spec.ts"></script>
 <div *ngIf="review && comments">
   <div class="row">
     <div class="col-1">
@@ -52,7 +53,7 @@
             </label>
           </div>
           <div>
-            <button class="btn-steam" type="submit" (click)="post()" [disabled]="!commentGroup.valid"><span>post</span>
+            <button class="btn-steam" type="submit" (click)="post()" [disabled]="!commentGroup.valid && loginService.isLoggedIn()"><span>post</span>
             </button>
           </div>
         </form>

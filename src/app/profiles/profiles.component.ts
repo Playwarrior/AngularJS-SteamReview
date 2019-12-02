@@ -5,6 +5,8 @@ import {UserService} from '../user.service';
 import {ReviewService} from '../review.service';
 import {Review} from '../../models/Review';
 import {Location} from '@angular/common';
+import {Game} from '../../models/Game';
+import {GameService} from '../game.service';
 
 @Component({
   selector: 'app-profiles',
@@ -17,8 +19,9 @@ export class ProfilesComponent implements OnInit {
 
   reviews: Review[];
   reviewProfiles: Profile[] = [];
+  reviewGames: Game[] = [];
 
-  constructor(private route: ActivatedRoute, private location: Location, private profileService: UserService, private reviewService: ReviewService) {
+  constructor(private route: ActivatedRoute, private location: Location, private profileService: UserService, private reviewService: ReviewService, private gameService: GameService) {
   }
 
   ngOnInit() {
@@ -35,7 +38,7 @@ export class ProfilesComponent implements OnInit {
 
           let index = 0;
           reviews.forEach(review => {
-            this.getProfileAsync(review.user, index);
+            this.getInfoAsync(review.user, review.appId, index);
             index++;
           });
         });
@@ -43,14 +46,22 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
-  getProfileAsync(user, index) {
+  getInfoAsync(user, appId, index) {
     this.profileService.getProfile(user, (profile) => {
       this.reviewProfiles[index] = profile;
     });
+
+    this.gameService.getGame(appId, user,(game) => {
+      this.reviewGames[index] = game;
+    })
   }
 
   getProfile(index) {
     return this.reviewProfiles[index];
+  }
+
+  getGame(index) {
+    return this.reviewGames[index];
   }
 
   goBack() {

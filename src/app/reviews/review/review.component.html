@@ -1,12 +1,12 @@
 <div *ngIf="review" class="row steam-back-ground">
-  <div class="col-1">
-    <button class="vote-button" (click)="upVote()" style="margin-top: 5px;">
+  <div class="col-1" style="margin-bottom: 3px">
+    <button class="vote-button" (click)="upVote()" >
       <img *ngIf="review.isUpVoted" src="../../../assets/upvote-arrow-lit.png" alt="" class="vote-image" width="30"
            height="30"/>
       <img *ngIf="!review.isUpVoted" src="../../../assets/upvote-arrow.png" alt="" class="vote-image" width="30"
            height="30"/>
     </button>
-    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 5px">
+    <p style="text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 20px">
       {{review.upVoteCount - review.downVoteCount}}
     </p>
     <button (click)="downVote()" class="vote-button">
@@ -26,7 +26,7 @@
       <h3>{{review.title}}</h3>
       <p class="review-content">{{review.content}}</p>
       <div class="d-inline">
-        <p>{{review.postDate | date}} <span *ngIf="review.edited" style="color: white;">- (<i>Edited</i>)</span></p>
+        <p>{{review.postDate | date}} <span *ngIf="review.edited" style="color: white;">- (<i>Edited</i>)</span><span *ngIf="game"> - <b>{{game.name}}</b></span></p>
       </div>
     </a>
   </div>

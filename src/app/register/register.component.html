@@ -1,27 +1,41 @@
 <!-- ADD FORM CONTROL!-->
 <div class="steam-back-ground">
-  <div class="row shift" style="margin-top: 15px">
-    <label>Email: <br/>
-      <input class="input-steam" #email/>
-    </label>
-  </div>
-  <div class="row shift">
-    <label>Password: <br/>
-      <input class="input-steam" #password/>
-    </label>
-  </div>
-  <div class="row shift">
-    <label>Steam: <br/>
-      <input class="input-steam" #steam/>
-    </label>
-  </div>
+  <form [formGroup]="registerForm">
+    <div class="row shift" style="margin-top: 15px">
+      <label>Email: <br/>
+        <input class="input-steam"  formControlName="email" required type="text"/>
+      </label>
+      <div class="text-warning"
+           *ngIf="registerForm.get('email').touched && (registerForm.get('email').errors?.required || registerForm.get('email').errors?.pattern)">
+          No or invalid email!
+      </div>
+    </div>
+    <div class="row shift">
+      <label>Password: <br/>
+        <input class="input-steam" formControlName="password" required type="password"/>
+      </label>
+      <div class="text-warning"
+           *ngIf="registerForm.get('password').touched && (registerForm.get('password').errors?.required)">
+        No or invalid password!
+      </div>
+    </div>
+    <div class="row shift">
+      <label>Steam: <br/>
+        <input class="input-steam" formControlName="steam" required type="text"/>
+      </label>
+      <div class="text-warning"
+           *ngIf="registerForm.get('steam').touched && (registerForm.get('steam').errors?.required)">
+        No or invalid steam-id!
+      </div>
+    </div>
 
-  <div class="row shift" style="margin-top: 15px">
-    <button class="btn-steam" (click)="register(email.value, password.value, steam.value)">
-      <span>Register</span>
-    </button>
-  </div>
-  <div class="row shift" style="margin-top: 10px">
-    <label class="alert-danger">{{message.get('register')}}</label>
-  </div>
+    <div class="row shift" style="margin-top: 15px">
+      <button class="btn-steam" [disabled]="!registerForm.valid" (click)="register()">
+        <span>Register</span>
+      </button>
+    </div>
+    <div class="row shift" style="margin-top: 10px">
+      <label class="alert-danger">{{message.get('register')}}</label>
+    </div>
+  </form>
 </div>

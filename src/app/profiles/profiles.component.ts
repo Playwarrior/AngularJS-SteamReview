@@ -56,6 +56,16 @@ export class ProfilesComponent implements OnInit {
     })
   }
 
+  convertIntToDate(dateInt: number) {
+    let d  = new Date(dateInt);
+    let now = new Date(Date.now());
+    d.setFullYear(now.getFullYear());
+    d.setMonth(now.getMonth());
+    d.setDate(now.getDate());
+
+    return d;
+  }
+
   getProfile(index) {
     return this.reviewProfiles[index];
   }

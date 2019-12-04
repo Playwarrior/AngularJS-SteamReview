@@ -31,7 +31,7 @@ export class InLogService {
       password: password,
       steam: steam
     }, this.httpOptions).pipe(
-      catchError(this.handleError<any>('register'))
+      catchError(this.handleError<any>('register', 'registering failed!'))
     );
   }
 
@@ -41,7 +41,7 @@ export class InLogService {
       password: password
     }, this.httpOptions)
       .pipe(
-        catchError(this.handleError<User>('login'))
+        catchError(this.handleError<User>('login', 'Login failed!'))
       ).subscribe(user => {
         cb(user);
         this.loggedIn = user;
@@ -56,9 +56,9 @@ export class InLogService {
     this.loggedInProfile = null;
   }
 
-  handleError<T>(operation = 'operation', result?: T) {
+  handleError<T>(operation = 'operation', message: string, result?: T) {
     return (error: any): Observable<T> => {
-      this.message.push(operation, error.message);
+      this.message.push(operation, message);
       return of(result as T);
     };
   }

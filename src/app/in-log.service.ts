@@ -31,7 +31,7 @@ export class InLogService {
       password: password,
       steam: steam
     }, this.httpOptions).pipe(
-      catchError(this.handleError<any>('register', 'registering failed!'))
+      catchError(this.handleError<any>('register', 'Email or SteamId is incorrect!'))
     );
   }
 
@@ -41,7 +41,7 @@ export class InLogService {
       password: password
     }, this.httpOptions)
       .pipe(
-        catchError(this.handleError<User>('login', 'Login failed!'))
+        catchError(this.handleError<User>('login', 'Email or password is incorrect!'))
       ).subscribe(user => {
         cb(user);
         this.loggedIn = user;

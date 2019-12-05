@@ -44,14 +44,16 @@ export class InLogService {
         catchError(this.handleError<User>('login', 'Email or password is incorrect!'))
       ).subscribe(user => {
         cb(user);
-        this.loggedIn = user;
-        this.profileService.getProfile(this.loggedIn.id, (profile) => {
-          this.loggedInProfile = profile;
-        })
+        if (user != null) {
+          this.loggedIn = user;
+          this.profileService.getProfile(this.loggedIn.id, (profile) => {
+            this.loggedInProfile = profile;
+          });
+        }
       });
   }
 
-  logout(){
+  logout() {
     this.loggedIn = null;
     this.loggedInProfile = null;
   }
